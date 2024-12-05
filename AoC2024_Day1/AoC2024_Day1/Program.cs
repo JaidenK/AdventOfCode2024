@@ -10,7 +10,9 @@ namespace AoC2024_Day1
     {
         static void Main(string[] args)
         {
-
+            var Day1 = new AoC_D1();
+            Console.WriteLine(Day1.GetAnswer("input.txt"));
+            Console.ReadKey();
         }
     }
 }
