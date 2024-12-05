@@ -4,7 +4,7 @@
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
 # Manual additions
-AoC_D1_input.txt
+input.txt
 
 # User-specific files
 *.rsuser
@@ -399,6 +399,3 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
-Day4/Code/Matlab/input.txt
-Day1/Notes/AoC_3_Notes.txt
-Day1/Notes/AoC_1-1_Notes.txt
