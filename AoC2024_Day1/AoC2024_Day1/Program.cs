@@ -51,7 +51,7 @@ namespace AoC2024_Day1
             var Day3 = new Day3();
             Day3.ParseInputFile(filename);
             Console.WriteLine("Part 1: " + Day3.GetAnswerPart1());
-            //Console.WriteLine("Part 2: " + Day3.GetAnswerPart2());
+            Console.WriteLine("Part 2: " + Day3.GetAnswerPart2());
         }
     }
 }
