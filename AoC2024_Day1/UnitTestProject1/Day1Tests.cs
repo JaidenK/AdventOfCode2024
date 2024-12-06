@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 namespace UnitTestProject1
 {
     [TestClass]
-    public class UnitTest1
+    public class Day1Tests
     {
         [TestMethod]
         public void TestMethod1()
