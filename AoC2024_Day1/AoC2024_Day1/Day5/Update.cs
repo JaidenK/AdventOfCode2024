@@ -45,5 +45,29 @@ namespace AoC2024_Day1.Day5
             }
             return true;
         }
+
+        public Update GetSortedToSatisfy(List<Rule> rules)
+        {
+            Update result = new Update();
+            result.Pages = new List<int>(Pages);
+            bool isSorted = false;
+            while(!isSorted)
+            {
+                isSorted = true;
+                foreach (var rule in rules)
+                {
+                    if (!result.Satisfies(rule))
+                    {
+                        int i1 = result.Pages.IndexOf(rule.Page1);
+                        int i2 = result.Pages.IndexOf(rule.Page2);
+                        result.Pages[i1] = rule.Page2;
+                        result.Pages[i2] = rule.Page1;
+                        isSorted = false;
+                        break;
+                    }
+                }
+            }
+            return result;
+        }
     }
 }

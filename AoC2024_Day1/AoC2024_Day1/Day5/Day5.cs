@@ -47,5 +47,17 @@ namespace AoC2024_Day1.Day5
             }
             return sum.ToString();
         }
+        public string GetAnswerPart2()
+        {
+            int sum = 0;
+            foreach (var update in Updates)
+            {
+                if (!update.SatisfiesAllRules(Rules))
+                {
+                    sum += update.GetSortedToSatisfy(Rules).GetMiddlePage();
+                }
+            }
+            return sum.ToString();
+        }
     }
 }
