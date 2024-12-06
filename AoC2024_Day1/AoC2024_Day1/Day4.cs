@@ -15,12 +15,15 @@ namespace AoC2024_Day1
         int rows = 0;
         int cols = 0;
 
+        string filename = "";
+
         public void ProcessMap(string[] map)
         {
             raw = map;
             cols = raw[0].Trim().Length; 
             rows = raw.Length;
             parsed = new char[rows, cols];
+            count = 0;
 
             for (int r = 0; r < rows; r++)
             {
@@ -78,7 +81,60 @@ namespace AoC2024_Day1
                 parsed[r, c] = raw[r][c];
             return isPartOfValidString;
         }
+        public void ProcessMap2(string[] map)
+        {
+            raw = map;
+            cols = raw[0].Trim().Length;
+            rows = raw.Length;
+            parsed = new char[rows, cols];
+            count = 0;
 
+            for (int r = 0; r < rows; r++)
+            {
+                for (int c = 0; c < cols; c++)
+                {
+                    parsed[r, c] = '.';
+                }
+            }
+            for (int r = 1; r < rows-1; r++)
+            {
+                for (int c = 1; c < cols-1; c++)
+                {
+                    if ((raw[r][c] == 'A')
+                        && (raw[r - 1][c - 1] == 'M')
+                        && (raw[r + 1][c - 1] == 'M')
+                        && (raw[r - 1][c + 1] == 'S')
+                        && (raw[r + 1][c + 1] == 'S'))
+                    {
+                        count++;
+                    }
+                    else if ((raw[r][c] == 'A')
+                        && (raw[r - 1][c - 1] == 'M')
+                        && (raw[r + 1][c - 1] == 'S')
+                        && (raw[r - 1][c + 1] == 'M')
+                        && (raw[r + 1][c + 1] == 'S'))
+                    {
+                        count++;
+                    }
+                    else if ((raw[r][c] == 'A')
+                        && (raw[r - 1][c - 1] == 'S')
+                        && (raw[r + 1][c - 1] == 'S')
+                        && (raw[r - 1][c + 1] == 'M')
+                        && (raw[r + 1][c + 1] == 'M'))
+                    {
+                        count++;
+                    }
+                    else if ((raw[r][c] == 'A')
+                        && (raw[r - 1][c - 1] == 'S')
+                        && (raw[r + 1][c - 1] == 'M')
+                        && (raw[r - 1][c + 1] == 'S')
+                        && (raw[r + 1][c + 1] == 'M'))
+                    {
+                        count++;
+                    }
+                }
+            }
+        }
         public void PrintParsed()
         {
             for (int r = 0; r < rows; r++)
@@ -93,16 +149,18 @@ namespace AoC2024_Day1
 
         public string GetAnswerPart1()
         {
+            ProcessMap(File.ReadAllLines(filename));
             return count.ToString();
         }
         public string GetAnswerPart2()
         {
-            throw new NotImplementedException();
+            ProcessMap2(File.ReadAllLines(filename));
+            return count.ToString();
         }
 
         internal void ParseInputFile(string filename)
         {
-            ProcessMap(File.ReadAllLines(filename));
+            this.filename = filename;
         }
     }
 }
