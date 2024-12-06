@@ -29,7 +29,8 @@ namespace AoC2024_Day1
             Console.WriteLine("Enter input filename:");
             var filename = Console.ReadLine().Trim();
             Day2.ParseInputFile(filename);
-            Console.WriteLine(Day2.GetAnswerPart1());
+            Console.WriteLine("Part 1: " + Day2.GetAnswerPart1());
+            Console.WriteLine("Part 2: " + Day2.GetAnswerPart2());
         }
     }
 }

@@ -45,6 +45,13 @@ namespace AoC2024_Day1
             return Reports.Where(r => IsReportSafe(r)).Count().ToString();
         }
 
+        public string GetAnswerPart2()
+        {
+            if (Reports is null)
+                return "Reports NULL";
+            return Reports.Where(r => IsReportSafe2(r)).Count().ToString();
+        }
+
         public static List<int> ParseLine(string line)
         {
             var result = new List<int>();
@@ -63,6 +70,36 @@ namespace AoC2024_Day1
                 int difference = report[i] - report[i - 1];
                 difference *= direction;
                 isSafe &= (difference >= 1 && difference <= 3);
+            }
+            return isSafe;
+        }
+        public static bool IsReportSafe2(List<int> report)
+        {
+            bool isSafe = true;
+            int direction = report[1] > report[0] ? 1 : -1;
+            for (int i = 1; i < report.Count; i++)
+            {
+                int difference = report[i] - report[i - 1];
+                difference *= direction;
+                isSafe &= (difference >= 1 && difference <= 3);
+            }
+            if (!isSafe)
+            {
+                // Brute force see if removing one of them makes it safe
+                for (int i = 0; i < report.Count; i++)
+                {
+                    // New list omitting this element
+                    var newReport = new List<int>();
+                    for (int j = 0; j < report.Count; j++)
+                    {
+                        if (i != j)
+                        {
+                            newReport.Add(report[j]);
+                        }
+                    }
+                    if (IsReportSafe(newReport))
+                        return true;
+                }
             }
             return isSafe;
         }
