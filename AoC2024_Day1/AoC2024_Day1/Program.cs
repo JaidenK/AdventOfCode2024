@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AoC2024_Day1.Day5;
 
 namespace AoC2024_Day1
 {
@@ -24,6 +25,7 @@ namespace AoC2024_Day1
                 case 2: Day2(filename); break;
                 case 3: Day3(filename); break;
                 case 4: Day4(filename); break;
+                case 5: Day5(filename); break;
                 default:
                     Console.WriteLine($"Day {day} not implemented.");
                     break;
@@ -61,6 +63,14 @@ namespace AoC2024_Day1
             Day4.ParseInputFile(filename);
             Console.WriteLine("Part 1: " + Day4.GetAnswerPart1());
             Console.WriteLine("Part 2: " + Day4.GetAnswerPart2());
+        }
+
+        static void Day5(string filename)
+        {
+            var Day5 = new AoC2024_Day1.Day5.Day5();
+            Day5.ParseFile(filename);
+            Console.WriteLine("Part 1: " + Day5.GetAnswerPart1());
+            //Console.WriteLine("Part 2: " + Day5.GetAnswerPart2());
         }
     }
 }
