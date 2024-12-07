@@ -122,7 +122,7 @@ namespace UnitTestProject1
             };
             var Day5 = new Day5();
             Day5.ParseLines(input);
-            Assert.AreEqual("143", Day5.GetAnswerPart2());
+            Assert.AreEqual("123", Day5.GetAnswerPart2());
         }
     }
 }
