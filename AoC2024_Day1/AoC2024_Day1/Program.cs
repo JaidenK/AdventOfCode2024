@@ -27,6 +27,7 @@ namespace AoC2024_Day1
                 case 4: Day4(filename); break;
                 case 5: Day5(filename); break;
                 case 6: Day6(filename); break;
+                case 7: Day7(filename); break;
                 default:
                     Console.WriteLine($"Day {day} not implemented.");
                     break;
@@ -82,6 +83,12 @@ namespace AoC2024_Day1
             Day6 = new Day6();
             Day6.ParseInputFile(filename);
             Console.WriteLine("Part 2: " + Day6.GetAnswerPart2());
+        }
+        static void Day7(string filename)
+        {
+            var Day7 = new Day7();
+            Day7.ParseFile(filename);
+            Console.WriteLine("Part 1: " + Day7.GetAnswerPart1());
         }
     }
 }
