@@ -36,6 +36,19 @@ namespace AoC2024_Day1
             }
             return sum.ToString();
         }
+
+        public string GetAnswerPart2()
+        {
+            ulong sum = 0;
+            foreach (EquationD7 equation in Equations)
+            {
+                if (equation.IsPossible(true))
+                {
+                    sum += equation.Value;
+                }
+            }
+            return sum.ToString();
+        }
     }
 
     public enum Operator
@@ -44,7 +57,8 @@ namespace AoC2024_Day1
         ADD,
         SUB,
         MUL,
-        DIV
+        DIV,
+        ELEPHANT
     }
 
     public class EquationD7
@@ -59,6 +73,10 @@ namespace AoC2024_Day1
             var Eq = new EquationD7();
             var split1 = str.Split(':');
             Eq.Value = ulong.Parse(split1[0]);
+            if(Eq.Value.ToString() != split1[0])
+            {
+                throw new Exception($"Big number {split1[0]}");
+            }
             var split2 = split1[1].Split(' ');
             foreach(var s in split2)
             {
@@ -69,12 +87,12 @@ namespace AoC2024_Day1
             return Eq;
         }
 
-        public bool IsPossible()
+        public bool IsPossible(bool elephantsEnabled = false)
         {
-            return CountPossibleEquations() > 0;
+            return CountPossibleEquations(elephantsEnabled) > 0;
         }
 
-        public int CountPossibleEquations()
+        public int CountPossibleEquations(bool elephantsEnabled = false)
         {
             if(Operators.Count == Operands.Count-1)
             {
@@ -91,10 +109,16 @@ namespace AoC2024_Day1
                         case Operator.MUL:
                             littleSum = littleSum * num;
                             break;
+                        case Operator.ELEPHANT:
+                            //Console.Write($"{littleSum} || {num} = ");
+                            littleSum = ulong.Parse(littleSum.ToString() + num.ToString());
+                            //Console.WriteLine($"{littleSum}");
+                            break;
                         default:
                             throw new NotImplementedException(Enum.GetNames(typeof(Operator))[(int)opp]);
                             break;
                     }
+
                 }
                 if (littleSum == Value)
                     return 1;
@@ -105,12 +129,19 @@ namespace AoC2024_Day1
                 int nPossibilities = 0;
 
                 Operators.Add(Operator.ADD);
-                nPossibilities += CountPossibleEquations();
+                nPossibilities += CountPossibleEquations(elephantsEnabled);
                 Operators.RemoveAt(Operators.Count - 1);
 
                 Operators.Add(Operator.MUL);
-                nPossibilities += CountPossibleEquations();
+                nPossibilities += CountPossibleEquations(elephantsEnabled);
                 Operators.RemoveAt(Operators.Count - 1);
+
+                if(elephantsEnabled)
+                {
+                    Operators.Add(Operator.ELEPHANT);
+                    nPossibilities += CountPossibleEquations(elephantsEnabled);
+                    Operators.RemoveAt(Operators.Count - 1);
+                }
 
                 return nPossibilities;
             }
